@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="alphabet">ພະຍັນຊະນະ</string>
+    <string name="app_name">Lao Language</string>
+    <string name="previous">&lt;</string>
+    <string name="next">></string>
+
+    <!-- How each alphabet sound -->
+    <string name="kaw">(kaw)</string>
+    <string name="khaw">(khaw)</string>
+    <string name="khoaw">(khoaw)</string>
+    <string name="ghaw">(ghaw)</string>
+    <string name="jaw">(jaw)</string>
+    <string name="saw">(saw)</string>
+    <string name="zaw">(zaw)</string>
+    <string name="yaw">(yaw)</string>
+    <string name="daw">(daw)</string>
+    <string name="taw">(taw)</string>
+    <string name="thaw">(thaw)</string>
+    <string name="thoaw">(thoaw)</string>
+    <string name="naw">(naw)</string>
+    <string name="baw">(baw)</string>
+    <string name="paw">(paw)</string>
+    <string name="faw">(faw)</string>
+    <string name="phaw">(phaw)</string>
+    <string name="poaw">(poaw</string>
+    <string name="foaw">(foaw)</string>
+    <string name="maw">(maw)</string>
+    <string name="yoaw">(yoaw)</string>
+    <string name="law">(law)</string>
+    <string name="vaw">(vaw)</string>
+    <string name="haw">(haw)</string>
+    <string name="aw">(aw)</string>
+    <string name="hoaw">(hoaw)</string>
+
+    <!-- Word for each alphabet -->
+    <string name="chicken">ໄກ່ (kai)</string>
+    <string name="egg">ໄຂ່ (khai)</string>
+    <string name="buffalo">ຄວາຍ (kauen)</string>
+    <string name="cow">ງົວ (ghua)</string>
+    <string name="plate">ຈານ (jarn)</string>
+    <string name="tiger">ເສືອ (saer)</string>
+    <string name="elephant">ຊ້າງ (zang)</string>
+    <string name="mosquito">ຍຸງ (yung)</string>
+    <string name="kid">ເດັກ (dake)</string>
+    <string name="eye">ຕາ (ta)</string>
+    <string name="bag">ຖົງ (tuong)</string>
+    <string name="flag">ທຸງ (taung)</string>
+    <string name="bird">ນົກ (nok)</string>
+    <string name="goat">ແບ້ (bair)</string>
+    <string name="fish">ປາ (pa)</string>
+    <string name="bee">ເຜື້ງ (phaung)</string>
+    <string name="rain">ຝົນ (fone)</string>
+    <string name="mountain">ພູ (phu)</string>
+    <string name="fire">ໄຟ (fai)</string>
+    <string name="cat">ແມວ (meo)</string>
+    <string name="medicine">ຢາ (ya)</string>
+    <string name="monkey">ລິງ (ling)</string>
+    <string name="fan">ວີ (vee)</string>
+    <string name="goose">ຫ່ານ (han)</string>
+    <string name="bowl">ໂອ (owl)</string>
+    <string name="house">ເຮືອນ (haern)</string>
+
+</resources>
