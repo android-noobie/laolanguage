@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="alphabet">ພະຍັນຊະນະ</string>
+    <!-- Tab names -->
+    <string name="tab_alphabet">Alphabet</string>
+    <string name="tab_number">Number</string>
+    
     <string name="app_name">Lao Language</string>
-    <string name="previous">&lt;</string>
-    <string name="next">></string>
+    <string name="previous">&lt; Previous</string>
+    <string name="next">Next &gt;</string>
 
     <!-- How each alphabet sound -->
-    <string name="kaw">(kaw)</string>
+    <string name="gaw">(gaw)</string>
     <string name="khaw">(khaw)</string>
     <string name="khoaw">(khoaw)</string>
     <string name="ghaw">(ghaw)</string>
@@ -16,15 +19,15 @@
     <string name="zaw">(zaw)</string>
     <string name="yaw">(yaw)</string>
     <string name="daw">(daw)</string>
-    <string name="taw">(taw)</string>
     <string name="thaw">(thaw)</string>
-    <string name="thoaw">(thoaw)</string>
+    <string name="toaw">(toaw)</string>
+    <string name="taw">(taw)</string>
     <string name="naw">(naw)</string>
     <string name="baw">(baw)</string>
-    <string name="paw">(paw)</string>
-    <string name="faw">(faw)</string>
+    <string name="bpaw">(bpaw)</string>
     <string name="phaw">(phaw)</string>
-    <string name="poaw">(poaw</string>
+    <string name="faw">(faw)</string>
+    <string name="poaw">(poaw)</string>
     <string name="foaw">(foaw)</string>
     <string name="maw">(maw)</string>
     <string name="yoaw">(yoaw)</string>
@@ -35,31 +38,42 @@
     <string name="hoaw">(hoaw)</string>
 
     <!-- Word for each alphabet -->
-    <string name="chicken">ໄກ່ (kai)</string>
+    <string name="chicken">ໄກ່ (gai)</string>
     <string name="egg">ໄຂ່ (khai)</string>
-    <string name="buffalo">ຄວາຍ (kauen)</string>
+    <string name="buffalo">ຄວາຍ (khauen)</string>
     <string name="cow">ງົວ (ghua)</string>
     <string name="plate">ຈານ (jarn)</string>
     <string name="tiger">ເສືອ (saer)</string>
     <string name="elephant">ຊ້າງ (zang)</string>
-    <string name="mosquito">ຍຸງ (yung)</string>
+    <string name="mosquito">ຍຸງ (yaung)</string>
     <string name="kid">ເດັກ (dake)</string>
-    <string name="eye">ຕາ (ta)</string>
+    <string name="eye">ຕາ (tha)</string>
     <string name="bag">ຖົງ (tuong)</string>
     <string name="flag">ທຸງ (taung)</string>
     <string name="bird">ນົກ (nok)</string>
     <string name="goat">ແບ້ (bair)</string>
-    <string name="fish">ປາ (pa)</string>
+    <string name="fish">ປາ (bpa)</string>
     <string name="bee">ເຜື້ງ (phaung)</string>
     <string name="rain">ຝົນ (fone)</string>
     <string name="mountain">ພູ (phu)</string>
     <string name="fire">ໄຟ (fai)</string>
     <string name="cat">ແມວ (meo)</string>
-    <string name="medicine">ຢາ (ya)</string>
+    <string name="medicine">ຢາ (yar)</string>
     <string name="monkey">ລິງ (ling)</string>
     <string name="fan">ວີ (vee)</string>
-    <string name="goose">ຫ່ານ (han)</string>
-    <string name="bowl">ໂອ (owl)</string>
+    <string name="goose">ຫ່ານ (harn)</string>
+    <string name="bowl">ໂອ (ole)</string>
     <string name="house">ເຮືອນ (haern)</string>
-
+    
+    <!-- words for each numbers -->
+    <string name="one">ນືື່ງ (neung)</string>
+    <string name="two">ສອງ (saong)</string>
+    <string name="three">ສາມ (saam)</string>
+    <string name="four">ສື່(sii)</string>
+    <string name="five">ຫ້າ (haa)</string>
+    <string name="six">ຫົກ (hok)</string>
+    <string name="seven">ເຈັດ (jait)</string>
+    <string name="eight">ແປດ (paad)</string>
+    <string name="nine">ເກົ້າ (gout)</string>
+    <string name="zero">ສູນ (zune)</string>
 </resources>

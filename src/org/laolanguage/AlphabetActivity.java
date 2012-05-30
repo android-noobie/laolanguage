@@ -10,11 +10,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
 public class AlphabetActivity extends Activity implements ViewFactory {
@@ -26,17 +26,21 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 	Typeface tf;
 	GestureDetector gestureDetector;
 	int curPosition = 0;
-	
+	Button previousBt;
+	Button nextBt;
+
 	// Unicode for each alphabets
 	char[] alphabet = { 0x0E81, 0x0E82, 0x0E84, 0x0E87, 0x0E88, 0x0EAA, 0x0E8A,
 			0x0E8D, 0x0E94, 0x0E95, 0x0E96, 0x0E97, 0x0E99, 0x0E9A, 0x0E9B,
 			0x0E9C, 0x0E9D, 0x0E9E, 0x0E9F, 0x0EA1, 0x0EA2, 0x0EA5, 0x0EA7,
 			0x0EAB, 0x0EAD, 0x0EAE };
-	int[] alphabetSound = {R.string.kaw, R.string.khaw, R.string.khoaw, R.string.ghaw, R.string.jaw, 
-						   R.string.saw, R.string.zaw, R.string.yaw, R.string.daw, R.string.taw, R.string.thaw,
-						   R.string.thoaw, R.string.naw, R.string.baw, R.string.paw, R.string.faw, R.string.phaw, 
-						   R.string.poaw, R.string.foaw, R.string.maw, R.string.yoaw, R.string.law, R.string.vaw,
-						   R.string.haw, R.string.aw, R.string.hoaw};
+	int[] alphabetSound = { R.string.gaw, R.string.khaw, R.string.khoaw,
+			R.string.ghaw, R.string.jaw, R.string.saw, R.string.zaw,
+			R.string.yaw, R.string.daw, R.string.thaw, R.string.toaw,
+			R.string.taw, R.string.naw, R.string.baw, R.string.bpaw,
+			R.string.phaw, R.string.faw, R.string.poaw, R.string.foaw,
+			R.string.maw, R.string.yoaw, R.string.law, R.string.vaw,
+			R.string.haw, R.string.aw, R.string.hoaw };
 	int[] alphabetImg = { R.drawable.chicken, R.drawable.egg,
 			R.drawable.buffalo, R.drawable.cow, R.drawable.plate,
 			R.drawable.tiger, R.drawable.elephant, R.drawable.mosquito,
@@ -53,7 +57,12 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 			R.string.cat, R.string.medicine, R.string.monkey, R.string.fan,
 			R.string.goose, R.string.bowl, R.string.house };
 
-	// int[] sound = {R.raw.chicken, R.raw.egg, R.raw.buffalo, R.raw.cow};
+	int[] sound = { R.raw.chicken, R.raw.egg, R.raw.buffalo, R.raw.cow,
+			R.raw.plate, R.raw.tiger, R.raw.elephant, R.raw.mosquito,
+			R.raw.kid, R.raw.eye, R.raw.bag, R.raw.flag, R.raw.bird,
+			R.raw.goat, R.raw.fish, R.raw.bee, R.raw.rain, R.raw.mountain,
+			R.raw.fire, R.raw.cat, R.raw.medicine, R.raw.monkey, R.raw.fan,
+			R.raw.goose, R.raw.bowl, R.raw.house };
 
 	/** Called when the activity is first created. */
 	@Override
@@ -65,7 +74,7 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 
 		alphabetTv = (TextView) findViewById(R.id.alphabetTv);
 		alphabetTv.setTypeface(tf);
-		
+
 		alphabetSoundTv = (TextView) findViewById(R.id.alphabetSoundTv);
 
 		wordIs = (ImageSwitcher) findViewById(R.id.wordIs);
@@ -79,6 +88,9 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 
 		wordTv = (TextView) findViewById(R.id.wordTv);
 		wordTv.setTypeface(tf);
+		
+		previousBt = (Button) findViewById(R.id.previousBt);
+		nextBt = (Button) findViewById(R.id.nextBt);
 
 		SimpleOnGestureListener simpleOnGestureListener = new SimpleOnGestureListener() {
 
@@ -129,13 +141,17 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 	}
 
 	public void playAudio(View view) {
-		Toast toast = Toast.makeText(this, "Sorry... This feature is not available yet.", Toast.LENGTH_SHORT);
-		toast.show();
-		// if(curPosition < sound.length) {
-		// mp = MediaPlayer.create(AlphabetActivity.this,sound[curPosition]);
-		// mp.setLooping(false);
-		// mp.start();
-		// }
+		// Toast.makeText(this, "Sorry... This feature is not available yet.",
+		// Toast.LENGTH_SHORT).show();
+		if (curPosition < sound.length) {
+			
+			// Cleanup audio previous resource if applicable before start a new one
+			cleanUpAudioResource();
+			
+			mp = MediaPlayer.create(AlphabetActivity.this, sound[curPosition]);
+			mp.setLooping(false);
+			mp.start();
+		}
 	}
 
 	public void nextAlphabet(View view) {
@@ -145,22 +161,39 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 	}
 
 	private void displayAlphabet(int position) {
+		
+		// Enable/Disable buttons
+		previousBt.setClickable(position > 0);
+		nextBt.setClickable(position < alphabet.length-1);
+		
 		alphabetTv.setText(String.valueOf(alphabet[position]));
 		alphabetSoundTv.setText(alphabetSound[position]);
 		wordIs.setImageResource(alphabetImg[position]);
 		wordTv.setText(word[position]);
+
+		playAudio(null);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		// This is not necessary since it is only a short clip
-		// mp.stop();
+		
+		// Cleanup audio resource
+		cleanUpAudioResource();
+	}
+
+	private void cleanUpAudioResource() {
+		if(mp != null) {
+			if(mp.isPlaying()) {
+				mp.stop();
+			}
+			mp.release();
+			mp = null;
+		}
 	}
 
 	public View makeView() {
 		ImageView iv = new ImageView(this);
-		//iv.setBackgroundColor(Color.WHITE);
 		iv.setScaleType(ScaleType.CENTER);
 		return iv;
 	}

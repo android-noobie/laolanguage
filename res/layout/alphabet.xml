@@ -62,6 +62,7 @@
         android:orientation="horizontal" >
 
         <Button
+            android:id="@+id/previousBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="previousAlphabet"
@@ -75,6 +76,7 @@
             android:src="@drawable/speaker" />
 
         <Button
+            android:id="@+id/nextBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="nextAlphabet"
