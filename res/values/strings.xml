@@ -1,79 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="eula_title">User Agreement</string>
+    <string name="eula_accept">Accept</string>
+    <string name="eula_refuse">Decline</string>
+
     <!-- Tab names -->
     <string name="tab_alphabet">Alphabet</string>
     <string name="tab_number">Number</string>
-    
+    <string name="tab_vowel">Vowel</string>
+    <string name="tab_preference">Preference</string>
     <string name="app_name">Lao Language</string>
     <string name="previous">&lt; Previous</string>
-    <string name="next">Next &gt;</string>
+    <string name="next">Next ></string>
+    <string name="playAudio">Play audio icon</string>
 
     <!-- How each alphabet sound -->
-    <string name="gaw">(gaw)</string>
-    <string name="khaw">(khaw)</string>
-    <string name="khoaw">(khoaw)</string>
-    <string name="ghaw">(ghaw)</string>
-    <string name="jaw">(jaw)</string>
-    <string name="saw">(saw)</string>
-    <string name="zaw">(zaw)</string>
-    <string name="yaw">(yaw)</string>
-    <string name="daw">(daw)</string>
-    <string name="thaw">(thaw)</string>
-    <string name="toaw">(toaw)</string>
-    <string name="taw">(taw)</string>
-    <string name="naw">(naw)</string>
-    <string name="baw">(baw)</string>
-    <string name="bpaw">(bpaw)</string>
-    <string name="phaw">(phaw)</string>
-    <string name="faw">(faw)</string>
-    <string name="poaw">(poaw)</string>
-    <string name="foaw">(foaw)</string>
-    <string name="maw">(maw)</string>
-    <string name="yoaw">(yoaw)</string>
-    <string name="law">(law)</string>
-    <string name="vaw">(vaw)</string>
-    <string name="haw">(haw)</string>
+    <string name="gaw">(g-aw)</string>
+    <string name="khaw">(kh-aw)</string>
+    <string name="khoaw">(kh-oaw)</string>
+    <string name="ghaw">(gh-aw)</string>
+    <string name="jaw">(j-aw)</string>
+    <string name="saw">(s-aw)</string>
+    <string name="zaw">(z-aw)</string>
+    <string name="yaw">(y-aw)</string>
+    <string name="daw">(d-aw)</string>
+    <string name="thaw">(th-aw)</string>
+    <string name="toaw">(t-oaw)</string>
+    <string name="taw">(t-aw)</string>
+    <string name="naw">(n-aw)</string>
+    <string name="baw">(b-aw)</string>
+    <string name="bpaw">(bp-aw)</string>
+    <string name="phaw">(ph-aw)</string>
+    <string name="faw">(f-aw)</string>
+    <string name="poaw">(p-oaw)</string>
+    <string name="foaw">(f-oaw)</string>
+    <string name="maw">(m-aw)</string>
+    <string name="yoaw">(y-oaw)</string>
+    <string name="law">(l-aw)</string>
+    <string name="waw">(w-aw)</string>
+    <string name="haw">(h-aw)</string>
     <string name="aw">(aw)</string>
-    <string name="hoaw">(hoaw)</string>
+    <string name="hoaw">(h-oaw)</string>
 
     <!-- Word for each alphabet -->
     <string name="chicken">ໄກ່ (gai)</string>
     <string name="egg">ໄຂ່ (khai)</string>
     <string name="buffalo">ຄວາຍ (khauen)</string>
     <string name="cow">ງົວ (ghua)</string>
-    <string name="plate">ຈານ (jarn)</string>
-    <string name="tiger">ເສືອ (saer)</string>
-    <string name="elephant">ຊ້າງ (zang)</string>
-    <string name="mosquito">ຍຸງ (yaung)</string>
+    <string name="plate">ຈານ (jahn)</string>
+    <string name="tiger">ເສືອ (seua)</string>
+    <string name="elephant">ຊ້າງ (zahng)</string>
+    <string name="mosquito">ຍຸງ (yoong)</string>
     <string name="kid">ເດັກ (dake)</string>
-    <string name="eye">ຕາ (tha)</string>
+    <string name="eye">ຕາ (thah)</string>
     <string name="bag">ຖົງ (tuong)</string>
-    <string name="flag">ທຸງ (taung)</string>
+    <string name="flag">ທຸງ (toong)</string>
     <string name="bird">ນົກ (nok)</string>
-    <string name="goat">ແບ້ (bair)</string>
-    <string name="fish">ປາ (bpa)</string>
+    <string name="goat">ແບ້ (bae)</string>
+    <string name="fish">ປາ (bpah)</string>
     <string name="bee">ເຜື້ງ (phaung)</string>
     <string name="rain">ຝົນ (fone)</string>
-    <string name="mountain">ພູ (phu)</string>
+    <string name="mountain">ພູ (phoo)</string>
     <string name="fire">ໄຟ (fai)</string>
-    <string name="cat">ແມວ (meo)</string>
-    <string name="medicine">ຢາ (yar)</string>
+    <string name="cat">ແມວ (maew)</string>
+    <string name="medicine">ຢາ (yah)</string>
     <string name="monkey">ລິງ (ling)</string>
-    <string name="fan">ວີ (vee)</string>
-    <string name="goose">ຫ່ານ (harn)</string>
-    <string name="bowl">ໂອ (ole)</string>
-    <string name="house">ເຮືອນ (haern)</string>
-    
+    <string name="fan">ວີ (wee)</string>
+    <string name="goose">ຫ່ານ (hahn)</string>
+    <string name="bowl">ໂອ (oh)</string>
+    <string name="house">ເຮືອນ (heuan)</string>
+
     <!-- words for each numbers -->
     <string name="one">ນືື່ງ (neung)</string>
     <string name="two">ສອງ (saong)</string>
-    <string name="three">ສາມ (saam)</string>
-    <string name="four">ສື່(sii)</string>
-    <string name="five">ຫ້າ (haa)</string>
+    <string name="three">ສາມ (sahm)</string>
+    <string name="four">ສື່(see)</string>
+    <string name="five">ຫ້າ (hah)</string>
     <string name="six">ຫົກ (hok)</string>
     <string name="seven">ເຈັດ (jait)</string>
-    <string name="eight">ແປດ (paad)</string>
-    <string name="nine">ເກົ້າ (gout)</string>
-    <string name="zero">ສູນ (zune)</string>
+    <string name="eight">ແປດ (bpaed)</string>
+    <string name="nine">ເກົ້າ (gao)</string>
+    <string name="zero">ສູນ (zoon)</string>
+
+    <!-- each vowel -->
+    <string name="ah_short">xະ,ah (short)</string>
+    <string name="ah_long">xາ,ah (long)</string>
+    <string name="i_short">xິ ,i/ee (short)</string>
+    <string name="ee_long">xີ,ee (long)</string>
+    <string name="ue_short">xຶ,eu (short)</string>
+    <string name="ue_long">xື,eu (long)</string>
+    <string name="oo_short">xຸ,oo (short)</string>
+    <string name="oo_long">xູ,oo (long)</string>
+    <string name="oh_short">ໂxະ,oh (short)</string>
+    <string name="oh_long">ໂx,oh (long)</string>
+    <string name="ay_short">ເxະ,ay (short)</string>
+    <string name="ay_long">ເx,ay (long)</string>
+    <string name="ae_short">ແxະ,ae (short)</string>
+    <string name="ae_long">ແx,ae (long)</string>
+    <string name="aw_short">ເxາະ,aw (short)</string>
+    <string name="aw_long">xໍ,aw (long)</string>
+    <string name="ia_short">ເxັຍ,ia (short)</string>
+    <string name="ia_long">ເxຍ,ia (long)</string>
+    <string name="ua_short">xົວະ,ua (short)</string>
+    <string name="ua_long">xົວ,ua (long)</string>
+    <string name="eua_short">ເxຶອ,eua (short)</string>
+    <string name="eua_long">ເxືອ,eua (long)</string>
+    <string name="euh_short">ເxິ,euh (short)</string>
+    <string name="euh_long">ເxີ,euh (long)</string>
+    <string name="ai_short">ໃx,ai (short/long)</string>
+    <string name="ai_long">ໄx,ai (short/long)</string>
+    <string name="ao">ເxົາ,ao (short)</string>
+    <string name="um">xຳ,um (short/long)</string>
+    <string name="description_x">NOTE: An \'x\' is used to show where the consonant is placed in the spelling</string>
+    <string name="description_xx">Additional \'x\' at the end in a vowel indicates that there may be ending consonant which is the final sound of the word</string>
+
+    <!-- Word for each vowel, some are reused from the alphabet -->
+    <string name="blackboard">ກະດານ (gah-darn)</string>
+    <string name="shrimppaste">ກະປິ (gah-bpee)</string>
+    <string name="bananaflower">ປີກ້ວຍ (bpee-guen)</string>
+    <string name="pumpkin">ໝາກອຶ (mahk-ue)</string>
+    <string name="hand">ມື (mue)</string>
+    <string name="bucket">ຄຸ (koo)</string>
+    <string name="crab">ກະປູ (gah-bpoo)</string>
+    <string name="table">ໂຕະ (thoh)</string>
+    <string name="watermelon">ໝ້າກໂມ (mahk-moh)</string>
+    <string name="kick">ເຕະ (thay)</string>
+    <string name="hammock">ເປ (bpay)</string>
+    <string name="lamb">ແກະ (gae)</string>
+    <string name="trumpet">ແກ (gae)</string>
+    <string name="island">ເກາະ (gaw)</string>
+    <string name="laoviolin">ຊໍ (zaw)</string>
+    <string name="slap">ຕີເປັຍ (thee-bpia)</string>
+    <string name="bat">ເຈຍ (jia)</string>
+    <string name="nolie">ຢ່າຕົວະ (yah-thua)</string>
+    <string name="stucco">ທາເບຶອ (tah-beua)</string>
+    <string name="boat">ເຮືອ (heua)</string>
+    <string name="dirty">ເປິເປື້ອນ (bpeuh-bpaern)</string>
+    <string name="pho">ຖ້ວຍເຟີ (tuey-pheuh)</string>
+    <string name="leave">ໃບໄມ້ (bai-mai)</string>
+    <string name="pole">ເສົາໄຟ (sao-fai)</string>
+    <string name="blackant">ມົດດໍາ (moad-dum)</string>
+    
+    <!-- Text for preference tab -->
+    <string name="audioOption">Play audio automatically</string>
+    <string name="audioVolume">Audio volume:</string>    
+
 </resources>

@@ -1,12 +1,8 @@
 package org.laolanguage;
 
-import android.app.Activity;
-import android.graphics.Typeface;
+import android.content.SharedPreferences.Editor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,14 +13,19 @@ import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
-public class AlphabetActivity extends Activity implements ViewFactory {
-	MediaPlayer mp;
+/**
+ * Activity for displaying Lao Alphabet.
+ * 
+ * @author Santi Anousaya
+ * 
+ */
+public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
+	private static final int DEFAULT_POSITION = 0;
+	private static final String ALPHABET_POSITION = "alphabet_position";
 	TextView alphabetTv;
 	TextView alphabetSoundTv;
 	TextView wordTv;
 	ImageSwitcher wordIs;
-	Typeface tf;
-	GestureDetector gestureDetector;
 	int curPosition = 0;
 	Button previousBt;
 	Button nextBt;
@@ -39,7 +40,7 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 			R.string.yaw, R.string.daw, R.string.thaw, R.string.toaw,
 			R.string.taw, R.string.naw, R.string.baw, R.string.bpaw,
 			R.string.phaw, R.string.faw, R.string.poaw, R.string.foaw,
-			R.string.maw, R.string.yoaw, R.string.law, R.string.vaw,
+			R.string.maw, R.string.yoaw, R.string.law, R.string.waw,
 			R.string.haw, R.string.aw, R.string.hoaw };
 	int[] alphabetImg = { R.drawable.chicken, R.drawable.egg,
 			R.drawable.buffalo, R.drawable.cow, R.drawable.plate,
@@ -64,16 +65,18 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 			R.raw.fire, R.raw.cat, R.raw.medicine, R.raw.monkey, R.raw.fan,
 			R.raw.goose, R.raw.bowl, R.raw.house };
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// Get saved or default position.
+		curPosition = getSharedPreferences().getInt(ALPHABET_POSITION,
+				DEFAULT_POSITION);
+
 		setContentView(R.layout.alphabet);
 
-		tf = Typeface.createFromAsset(getAssets(), "fonts/LaoUI.ttf");
-
 		alphabetTv = (TextView) findViewById(R.id.alphabetTv);
-		alphabetTv.setTypeface(tf);
+		alphabetTv.setTypeface(getLaoTypeface());
 
 		alphabetSoundTv = (TextView) findViewById(R.id.alphabetSoundTv);
 
@@ -87,115 +90,105 @@ public class AlphabetActivity extends Activity implements ViewFactory {
 		wordIs.setOutAnimation(out);
 
 		wordTv = (TextView) findViewById(R.id.wordTv);
-		wordTv.setTypeface(tf);
-		
+		wordTv.setTypeface(getLaoTypeface());
+
 		previousBt = (Button) findViewById(R.id.previousBt);
 		nextBt = (Button) findViewById(R.id.nextBt);
 
-		SimpleOnGestureListener simpleOnGestureListener = new SimpleOnGestureListener() {
-
-			@Override
-			public boolean onFling(MotionEvent e1, MotionEvent e2,
-
-			float velocityX, float velocityY) {
-
-				float sensitvity = 50;
-
-				if ((e1.getX() - e2.getX()) > sensitvity) {
-					nextAlphabet(null);
-				} else if ((e2.getX() - e1.getX()) > sensitvity) {
-
-					previousAlphabet(null);
-
-				} else if ((e1.getY() - e2.getY()) > sensitvity) {
-
-					// ts1.setText("Swipe Up");
-
-				} else if ((e2.getY() - e1.getY()) > sensitvity) {
-
-					// ts1.setText("Swipe Down");
-
-				}
-
-				return true;
-
-			}
-
-		};
-
-		gestureDetector = new GestureDetector(this, simpleOnGestureListener);
+		// Add gesture detector for fling motions.
+		addGestureDector();
 
 		displayAlphabet(curPosition);
 
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return gestureDetector.onTouchEvent(event);
-	}
-
+	/**
+	 * Display previous alphabet.
+	 * 
+	 * @param view
+	 */
 	public void previousAlphabet(View view) {
 		if (curPosition > 0) {
 			displayAlphabet(--curPosition);
+			playAudio(null);
 		}
 	}
 
-	public void playAudio(View view) {
-		// Toast.makeText(this, "Sorry... This feature is not available yet.",
-		// Toast.LENGTH_SHORT).show();
+	/**
+	 * Create audio for corresponding alphabet.
+	 */
+	@Override
+	protected MediaPlayer createMediaPlayer() {
+		MediaPlayer mp = null;
 		if (curPosition < sound.length) {
-			
-			// Cleanup audio previous resource if applicable before start a new one
-			cleanUpAudioResource();
-			
 			mp = MediaPlayer.create(AlphabetActivity.this, sound[curPosition]);
-			mp.setLooping(false);
-			mp.start();
 		}
+		return mp;
 	}
 
+	/**
+	 * Display next alphabet.
+	 * 
+	 * @param view
+	 */
 	public void nextAlphabet(View view) {
 		if (curPosition < alphabet.length - 1) {
 			displayAlphabet(++curPosition);
+			playAudio(null);
 		}
 	}
 
+	/**
+	 * Display alphabet at specified position.
+	 * 
+	 * @param position
+	 */
 	private void displayAlphabet(int position) {
-		
+
 		// Enable/Disable buttons
 		previousBt.setClickable(position > 0);
-		nextBt.setClickable(position < alphabet.length-1);
-		
+		nextBt.setClickable(position < alphabet.length - 1);
+
 		alphabetTv.setText(String.valueOf(alphabet[position]));
 		alphabetSoundTv.setText(alphabetSound[position]);
 		wordIs.setImageResource(alphabetImg[position]);
 		wordTv.setText(word[position]);
-
-		playAudio(null);
 	}
 
+	/**
+	 * Save the position of current alphabet in preference.
+	 */
 	@Override
-	protected void onPause() {
-		super.onPause();
-		
-		// Cleanup audio resource
-		cleanUpAudioResource();
+	protected void saveSharedPreferences(Editor ed) {
+		super.saveSharedPreferences(ed);
+
+		// Save current position (progress)
+		ed.putInt(ALPHABET_POSITION, curPosition);
 	}
 
-	private void cleanUpAudioResource() {
-		if(mp != null) {
-			if(mp.isPlaying()) {
-				mp.stop();
-			}
-			mp.release();
-			mp = null;
-		}
-	}
-
+	/**
+	 * ViewFactory method to create ImageView for ImageSwitcher.
+	 */
 	public View makeView() {
 		ImageView iv = new ImageView(this);
 		iv.setScaleType(ScaleType.CENTER);
 		return iv;
+	}
+
+	/**
+	 * Show next alphabet on left swipe.
+	 */
+	@Override
+	protected void swipeLeft() {
+		nextAlphabet(null);
+	}
+
+	/**
+	 * Show previous alphabet on right swipe.
+	 */
+	@Override
+	protected void swipeRight() {
+		previousAlphabet(null);
 	}
 
 }

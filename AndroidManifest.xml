@@ -29,6 +29,14 @@
             android:name="org.laolanguage.NumberActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="org.laolanguage.VowelActivity"
+            android:label="@string/app_name" >
+        </activity>
+                <activity
+            android:name="org.laolanguage.PreferenceActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

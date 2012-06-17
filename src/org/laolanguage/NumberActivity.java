@@ -1,24 +1,31 @@
 package org.laolanguage;
 
-import android.app.Activity;
-import android.graphics.Color;
+import android.content.SharedPreferences.Editor;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
 import android.widget.GridView;
 
-public class NumberActivity extends Activity {
-	MediaPlayer mp;
+/**
+ * Activity to display Lao numbers.
+ * 
+ * @author Santi Anousaya
+ * 
+ */
+public class NumberActivity extends LaoBaseActivity {
+	private static final boolean DEFAULT_TRADITIONAL_MODE = false;
+	private static final String TRADITIONAL_MODE = "traditionalMode";
 	GridView gridview;
 	NumberAdapter adapter;
+	CheckBox traditionalCb;
 
 	int[] numberSound = { R.raw.one, R.raw.two, R.raw.three, R.raw.four,
 			R.raw.five, R.raw.six, R.raw.seven, R.raw.eight, R.raw.nine,
 			R.raw.zero };
+	Integer selectedPosition;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,54 +34,67 @@ public class NumberActivity extends Activity {
 
 		gridview = (GridView) findViewById(R.id.numberview);
 
+		// Get saved or the default value of traditional number mode
+		boolean traditionalMode = getSharedPreferences().getBoolean(
+				TRADITIONAL_MODE, DEFAULT_TRADITIONAL_MODE);
+		traditionalCb = (CheckBox) findViewById(R.id.traditionalCb);
+		traditionalCb.setChecked(traditionalMode);
+
 		adapter = new NumberAdapter(this);
+		adapter.setTraditionalMode(traditionalMode);
 		gridview.setAdapter(adapter);
 
+		// Add on click listener to play audio for selected number.
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
 
-				// Cleanup audio previous resource if applicable before start a
-				// new one
-				cleanUpAudioResource();
-
-				if (position < numberSound.length-1) {
-					mp = MediaPlayer.create(NumberActivity.this,
-							numberSound[position]);
-					mp.setLooping(false);
-					mp.start();
-				} else if (position == 10) {
-					mp = MediaPlayer
-							.create(NumberActivity.this, numberSound[9]);
-					mp.setLooping(false);
-					mp.start();
-				}
+				selectedPosition = position;
+				playAudio(v);
 			}
 		});
 
 	}
 
+	/**
+	 * Switch number mode between standar number and traditional number.
+	 * 
+	 * @param view
+	 */
 	public void switchNumberMode(View view) {
-		adapter.toggleMode();
+		adapter.setTraditionalMode(traditionalCb.isChecked());
 		gridview.invalidateViews();
 
 	}
 
-	private void cleanUpAudioResource() {
-		if (mp != null) {
-			if (mp.isPlaying()) {
-				mp.stop();
+	/**
+	 * Create audio for selected number.
+	 */
+	@Override
+	protected MediaPlayer createMediaPlayer() {
+		MediaPlayer mp = null;
+		if (selectedPosition != null) {
+			if (selectedPosition < numberSound.length - 1) {
+				mp = MediaPlayer.create(NumberActivity.this,
+						numberSound[selectedPosition]);
+			} else if (selectedPosition == 10) {
+				mp = MediaPlayer.create(NumberActivity.this, numberSound[9]);
 			}
-			mp.release();
-			mp = null;
+
+			// Reset it after the media have been created.
+			selectedPosition = null;
 		}
+		return mp;
 	}
 
+	/**
+	 * Save the current traditional number mode.
+	 */
 	@Override
-	protected void onPause() {
-		super.onPause();
+	protected void saveSharedPreferences(Editor ed) {
+		super.saveSharedPreferences(ed);
 
-		// Cleanup audio resource
-		cleanUpAudioResource();
+		// Save current number mode
+		ed.putBoolean(TRADITIONAL_MODE, traditionalCb.isChecked());
 	}
 }
