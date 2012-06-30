@@ -15,11 +15,6 @@
             android:name=".LanguageTabWidget"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="org.laolanguage.AlphabetActivity"
@@ -33,9 +28,18 @@
             android:name="org.laolanguage.VowelActivity"
             android:label="@string/app_name" >
         </activity>
-                <activity
+        <activity
             android:name="org.laolanguage.PreferenceActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="org.laolanguage.IntroductionActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

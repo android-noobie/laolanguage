@@ -1,6 +1,7 @@
 package org.laolanguage;
 
 import android.content.SharedPreferences.Editor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
@@ -42,13 +43,17 @@ public class PreferenceActivity extends LaoBaseActivity {
 			}
 
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
+				playAudio(null);
 			}
 		});
 	}
 
 	private void setVolumeValue(int progress) {
 		volumeTv.setText(" " + progress);
+
+		// Update static variables
+		LaoBaseActivity.audioOption = audioOptionCb.isChecked();
+		LaoBaseActivity.audioVolume = progress;
 	}
 
 	/**
@@ -62,6 +67,16 @@ public class PreferenceActivity extends LaoBaseActivity {
 
 		// Update static variables
 		LaoBaseActivity.audioOption = audioOptionCb.isChecked();
-		LaoBaseActivity.audioVolume = audioVolumeSb.getProgress();
+	}
+
+	/**
+	 * Create background audio.
+	 */
+	@Override
+	protected MediaPlayer createMediaPlayer() {
+		MediaPlayer mp = MediaPlayer.create(PreferenceActivity.this,
+				R.raw.champalao);
+		mp.setLooping(true);
+		return mp;
 	}
 }

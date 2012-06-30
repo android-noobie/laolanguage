@@ -65,7 +65,7 @@ public class NumberAdapter extends BaseAdapter {
 
 			textView2 = new TextView(mContext);
 			textView2.setTypeface(tf);
-			textView2.setTextSize(16);
+			textView2.setTextSize(14);
 			textView2.setGravity(Gravity.CENTER);
 			layout.addView(textView2);
 

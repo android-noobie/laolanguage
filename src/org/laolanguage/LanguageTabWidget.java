@@ -68,8 +68,6 @@ public class LanguageTabWidget extends TabActivity {
 		mPrefs = getSharedPreferences(getString(R.string.app_name), 0);
 
 		tabHost.setCurrentTab(mPrefs.getInt(LAST_ACCESSED_TAB, 0));
-
-		Eula.show(getCurrentActivity());
 	}
 
 	/**

@@ -9,8 +9,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.webkit.WebView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * Class for display User Agreement.
@@ -57,9 +57,10 @@ class Eula {
 
 			AlertDialog alertDialog = builder.create();
 			final ScrollView s_view = new ScrollView(activity);
-			final WebView w_view = new WebView(activity);
-			w_view.loadData(readEula(activity), "text/html", "UTF-8");
-			s_view.addView(w_view);
+			TextView t_view = new TextView(activity);
+			t_view.setText(readEula(activity));
+			t_view.setTextSize(12);
+			s_view.addView(t_view);
 			alertDialog.setView(s_view);
 			alertDialog.show();
 			return false;
@@ -83,7 +84,7 @@ class Eula {
 			String line;
 			StringBuilder buffer = new StringBuilder();
 			while ((line = in.readLine()) != null) {
-				buffer.append(line);
+				buffer.append(line).append("\n");
 			}
 			return buffer.toString();
 		} catch (IOException e) {

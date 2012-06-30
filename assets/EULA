@@ -1,14 +1,10 @@
-<HTML>
-<HEAD>
-<STYLE type="text/css">
-li {font-size:small;}
-</STYLE>
-</HEAD>
-<BODY>
-<OL>
-	<LI><b>NO WARRANTIES</b><br>The Lao Language application is distributed "AS-IS". No warranty of any kind is expressed or implied.
-	    <br>YOU USE IT AT YOUR OWN RISK.<br>The author will not be liable for the data loss, damages, loss of profits 
-	    or any other kind of loss while using this application.
-	<LI><b>DISTRIBUTION</b><br>The Lao Language is a FREE application and can be freely distributed, provided that no charge above the cost of distribution is levied.
-</OL>
-</HTML>
+The Lao Language is developed to assist and promote the learning of Lao basic alphabets, vowels, and numbers.
+Copyright (C) 2012  Santi Anousaya
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program.
+If not, see <http://www.gnu.org/licenses/>.

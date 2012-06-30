@@ -116,7 +116,6 @@ public abstract class LaoBaseActivity extends Activity {
 					if (mp != null) {
 						float volume = getAudioVolumn() / 100f;
 						mp.setVolume(volume, volume);
-						mp.setLooping(false);
 						mp.start();
 					}
 				}

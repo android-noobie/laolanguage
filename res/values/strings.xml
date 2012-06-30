@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="eula_title">User Agreement</string>
+    <string name="eula_title">End User License Agreement (EULA)</string>
     <string name="eula_accept">Accept</string>
     <string name="eula_refuse">Decline</string>
 
@@ -14,6 +14,11 @@
     <string name="previous">&lt; Previous</string>
     <string name="next">Next ></string>
     <string name="playAudio">Play audio icon</string>
+    <string name="continueText">Continue</string>
+    <string name="introduction">This app is developed by Santi Anousaya to assist and promote the learning of Lao basic alphabets, vowels, and numbers based on 1st grade learning materials.
+\n\nIn this version, you will learn the basic alphabets, vowels, and numbers. More learning materials (e.g. composite alphabets, composite vowels, accents, etc.) will be added in the future version.
+\n\nIf you have any comments, suggestions, and/or would like to get involve, please send email to thelaolanguage@gmail.com</string>
+    <string name="skipIntroduction">Do not show this page again</string>
 
     <!-- How each alphabet sound -->
     <string name="gaw">(g-aw)</string>
@@ -114,7 +119,8 @@
     <string name="um">xຳ,um (short/long)</string>
     <string name="description_x">NOTE: An \'x\' is used to show where the consonant is placed in the spelling</string>
     <string name="description_xx">Additional \'x\' at the end in a vowel indicates that there may be ending consonant which is the final sound of the word</string>
-
+	<string name="practice">Practice Reading:</string>
+	
     <!-- Word for each vowel, some are reused from the alphabet -->
     <string name="blackboard">ກະດານ (gah-darn)</string>
     <string name="shrimppaste">ກະປິ (gah-bpee)</string>
@@ -141,9 +147,9 @@
     <string name="leave">ໃບໄມ້ (bai-mai)</string>
     <string name="pole">ເສົາໄຟ (sao-fai)</string>
     <string name="blackant">ມົດດໍາ (moad-dum)</string>
-    
+
     <!-- Text for preference tab -->
     <string name="audioOption">Play audio automatically</string>
-    <string name="audioVolume">Audio volume:</string>    
+    <string name="audioVolume">Audio volume:</string>
 
 </resources>
