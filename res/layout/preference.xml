@@ -33,4 +33,27 @@
         android:max="100"
         android:minWidth="400dp" />
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delayLabelPrefix" />
+
+        <Spinner
+            android:id="@+id/autoPlayDelaySp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/delayArrays"
+            android:prompt="@string/delayPrompt"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delayLabelSuffix" />
+    </LinearLayout>
+
 </LinearLayout>

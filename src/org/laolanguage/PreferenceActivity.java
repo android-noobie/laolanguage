@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
@@ -29,9 +30,11 @@ import android.widget.TextView;
  * 
  */
 public class PreferenceActivity extends LaoBaseActivity {
+	private static final int VALUE_INDEX_OFFSET = 5;
 	private CheckBox audioOptionCb;
 	private SeekBar audioVolumeSb;
 	private TextView volumeTv;
+	Spinner autoPlayDelaySp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,12 @@ public class PreferenceActivity extends LaoBaseActivity {
 		audioOptionCb = (CheckBox) findViewById(R.id.audioOption);
 		volumeTv = (TextView) findViewById(R.id.volValue);
 		audioVolumeSb = (SeekBar) findViewById(R.id.volSeekBar);
+		autoPlayDelaySp = (Spinner) findViewById(R.id.autoPlayDelaySp);
 
 		audioOptionCb.setChecked(isAudioOption());
 		audioVolumeSb.setProgress(getAudioVolumn());
 		setVolumeValue(getAudioVolumn());
+		autoPlayDelaySp.setSelection(getAutoPlayDelay() - VALUE_INDEX_OFFSET);
 
 		audioVolumeSb.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			public void onProgressChanged(SeekBar seekBar, int progress,
@@ -79,8 +84,15 @@ public class PreferenceActivity extends LaoBaseActivity {
 		ed.putBoolean(AUDIO_OPTION, audioOptionCb.isChecked());
 		ed.putInt(AUDIO_VOLUME, audioVolumeSb.getProgress());
 
+		Integer delay = Integer.valueOf((String) autoPlayDelaySp
+				.getSelectedItem());
+
+		ed.putInt(AUTO_PLAY_DELAY, delay);
+
 		// Update static variables
 		LaoBaseActivity.audioOption = audioOptionCb.isChecked();
+		LaoBaseActivity.autoPlayDelay = delay;
+
 	}
 
 	/**

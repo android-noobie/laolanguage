@@ -67,7 +67,7 @@ public class VowelSoundAdapter extends BaseAdapter {
 
 			layout = new LinearLayout(mContext);
 			layout.setOrientation(LinearLayout.VERTICAL);
-			layout.setBackgroundResource(R.drawable.view_border);
+			// layout.setBackgroundResource(R.drawable.view_border);
 
 			textView = new TextView(mContext);
 			textView.setTypeface(tf);

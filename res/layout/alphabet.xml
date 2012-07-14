@@ -65,21 +65,36 @@
         <Button
             android:id="@+id/previousBt"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/previous"
             android:onClick="previousAlphabet"
             android:text="@string/previous" />
 
-        <ImageButton
+        <ToggleButton
+            android:id="@+id/autoplayTb"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/playAudio"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:onClick="autoPlay"
+            android:textOff="Autoplay\nOFF"
+            android:textOn="Autoplay\nON" />
+
+        <Button
+            android:id="@+id/audioBt"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/speaker"
             android:onClick="playAudio"
-            android:src="@drawable/speaker" />
+            android:text="@string/playAudio" />
 
         <Button
             android:id="@+id/nextBt"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/next"
             android:onClick="nextAlphabet"
             android:text="@string/next" />
     </LinearLayout>

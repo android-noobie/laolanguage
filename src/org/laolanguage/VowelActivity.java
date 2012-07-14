@@ -16,6 +16,8 @@
  */
 package org.laolanguage;
 
+import java.util.TimerTask;
+
 import android.content.SharedPreferences.Editor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import android.widget.ViewSwitcher.ViewFactory;
 
 /**
@@ -47,7 +50,9 @@ public class VowelActivity extends LaoBaseActivity implements ViewFactory {
 
 	int curPosition = 0;
 	Button previousBt;
+	ToggleButton autoplayTb;
 	Button nextBt;
+	Button audioBt;
 
 	// each vowels
 	int[] vowel = { R.string.ah_short, R.string.ah_long, R.string.i_short,
@@ -127,6 +132,8 @@ public class VowelActivity extends LaoBaseActivity implements ViewFactory {
 		gridview.setAdapter(adapter);
 
 		previousBt = (Button) findViewById(R.id.previousBt);
+		autoplayTb = (ToggleButton) findViewById(R.id.autoplayTb);
+		audioBt = (Button) findViewById(R.id.audioBt);
 		nextBt = (Button) findViewById(R.id.nextBt);
 
 		// Add gesture detector for fling motions.
@@ -142,10 +149,14 @@ public class VowelActivity extends LaoBaseActivity implements ViewFactory {
 	 * @param view
 	 */
 	public void previousVowel(View view) {
-		if (curPosition > 0) {
-			displayVowel(--curPosition);
-			playAudio(null);
+		--curPosition;
+		// Set to start from the last vowel if it is at the beginning but
+		// "< Previous" button is clicked
+		if (curPosition < 0) {
+			curPosition = vowel.length - 1;
 		}
+		displayVowel(curPosition);
+		playAudio(null);
 	}
 
 	/**
@@ -164,10 +175,14 @@ public class VowelActivity extends LaoBaseActivity implements ViewFactory {
 	 * @param view
 	 */
 	public void nextVowel(View view) {
-		if (curPosition < vowel.length - 1) {
-			displayVowel(++curPosition);
-			playAudio(null);
+		++curPosition;
+		// Set to start from the first vowel if it is at the end but
+		// "Next >" button is clicked
+		if (curPosition == vowel.length) {
+			curPosition = 0;
 		}
+		displayVowel(curPosition);
+		playAudio(null);
 	}
 
 	/**
@@ -178,8 +193,8 @@ public class VowelActivity extends LaoBaseActivity implements ViewFactory {
 	private void displayVowel(int position) {
 
 		// Enable/Disable buttons
-		previousBt.setClickable(position > 0);
-		nextBt.setClickable(position < vowel.length - 1);
+		// previousBt.setClickable(position > 0);
+		// nextBt.setClickable(position < vowel.length - 1);
 
 		// Split comma delimited of the vowel and its sounding
 		String[] values = getString(vowel[position]).split(",");
@@ -238,5 +253,44 @@ public class VowelActivity extends LaoBaseActivity implements ViewFactory {
 	@Override
 	protected void swipeRight() {
 		previousVowel(null);
+	}
+
+	/**
+	 * Get TimerTask for auto play.
+	 * 
+	 * @param view
+	 */
+	@Override
+	public TimerTask getAutoPlayTask() {
+		TimerTask task = null;
+		if (autoplayTb.isChecked()) {
+			final Runnable runnable = new Runnable() {
+				public void run() {
+					nextVowel(null);
+				}
+			};
+
+			previousBt.setVisibility(View.INVISIBLE);
+			nextBt.setVisibility(View.INVISIBLE);
+			audioBt.setVisibility(View.INVISIBLE);
+			task = new TimerTask() {
+				@Override
+				public void run() {
+					VowelActivity.this.runOnUiThread(runnable);
+				}
+			};
+
+			// Prevent the device to go into sleep mode
+			autoplayTb.setKeepScreenOn(true);
+
+		} else {
+			previousBt.setVisibility(View.VISIBLE);
+			nextBt.setVisibility(View.VISIBLE);
+			audioBt.setVisibility(View.VISIBLE);
+
+			// Allow the device to go into sleep mode
+			autoplayTb.setKeepScreenOn(false);
+		}
+		return task;
 	}
 }

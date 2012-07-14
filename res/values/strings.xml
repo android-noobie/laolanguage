@@ -11,9 +11,9 @@
     <string name="tab_vowel">Vowel</string>
     <string name="tab_preference">Preference</string>
     <string name="app_name">Lao Language</string>
-    <string name="previous">&lt; Previous</string>
-    <string name="next">Next ></string>
-    <string name="playAudio">Play audio icon</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="playAudio">Audio</string>
     <string name="continueText">Continue</string>
     <string name="introduction">This app is developed by Santi Anousaya to assist and promote the learning of Lao basic alphabets, vowels, and numbers based on 1st grade learning materials.
 \n\nIn this version, you will learn the basic alphabets, vowels, and numbers. More learning materials (e.g. composite alphabets, composite vowels, accents, etc.) will be added in the future version.
@@ -151,5 +151,21 @@
     <!-- Text for preference tab -->
     <string name="audioOption">Play audio automatically</string>
     <string name="audioVolume">Audio volume:</string>
+    <string name="delayPrompt">Select a Delay</string>
+    <string name="delayLabelPrefix">Autoplay Delay:</string>
+    <string name="delayLabelSuffix">seconds</string>
+    <string-array name="delayArrays">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
 
 </resources>

@@ -16,6 +16,9 @@
  */
 package org.laolanguage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -35,18 +38,22 @@ import android.view.View;
 public abstract class LaoBaseActivity extends Activity {
 	private static final int DEFAULT_AUDIO_DELAY = 0;
 	private static final boolean DEFAULT_AUDIO_OPTION = true;
+	private static final int DEFAULT_AUTO_PLAY_DELAY = 5;
 	private static final int DEFAULT_VOLUME = 100;
 	static final String AUDIO_OPTION = "audio_option";
 	static final String AUDIO_VOLUME = "audio_volume";
+	static final String AUTO_PLAY_DELAY = "auto_play_delay";
 
 	// These are shared with all instances
 	static Boolean audioOption;
 	static Integer audioVolume;
+	static Integer autoPlayDelay;
 
 	private GestureDetector gestureDetector;
 	private Typeface tf;
 	private MediaPlayer mp;
 	private SharedPreferences mPrefs;
+	Timer autoPlayTimer;
 
 	/**
 	 * Get audio option from the preference or the default value.
@@ -72,6 +79,19 @@ public abstract class LaoBaseActivity extends Activity {
 					DEFAULT_VOLUME);
 		}
 		return audioVolume;
+	}
+
+	/**
+	 * Get auto play delay from the preference or the default value.
+	 * 
+	 * @return
+	 */
+	protected int getAutoPlayDelay() {
+		if (autoPlayDelay == null) {
+			autoPlayDelay = getSharedPreferences().getInt(AUTO_PLAY_DELAY,
+					DEFAULT_AUTO_PLAY_DELAY);
+		}
+		return autoPlayDelay;
 	}
 
 	/**
@@ -108,6 +128,17 @@ public abstract class LaoBaseActivity extends Activity {
 			}
 			mp.release();
 			mp = null;
+		}
+	}
+
+	/**
+	 * Cancel auto play to free up resource if applicable.
+	 */
+	protected void cancelAutoPlay() {
+		if (autoPlayTimer != null) {
+			autoPlayTimer.cancel();
+			autoPlayTimer.purge();
+			autoPlayTimer = null;
 		}
 	}
 
@@ -176,6 +207,9 @@ public abstract class LaoBaseActivity extends Activity {
 
 		// Cleanup audio resource
 		cleanUpAudioResource();
+
+		// Cancel AutoPlay if applicable
+		cancelAutoPlay();
 	}
 
 	/**
@@ -261,12 +295,32 @@ public abstract class LaoBaseActivity extends Activity {
 	}
 
 	/**
-	 * Override to play audio onResume() if applicable.
+	 * Override to play audio and auto play onResume() if applicable.
 	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
 
 		playAudio(null);
+
+		autoPlay(null);
+	}
+
+	/**
+	 * Start auto play if applicable.
+	 */
+	public void autoPlay(View view) {
+		TimerTask task = getAutoPlayTask();
+		if (task != null) {
+			autoPlayTimer = new Timer("autoPlay");
+			autoPlayTimer.schedule(task, 0, getAutoPlayDelay() * 1000);
+
+		} else {
+			cancelAutoPlay();
+		}
+	}
+
+	protected TimerTask getAutoPlayTask() {
+		return null;
 	}
 }

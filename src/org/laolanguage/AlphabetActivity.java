@@ -16,6 +16,8 @@
  */
 package org.laolanguage;
 
+import java.util.TimerTask;
+
 import android.content.SharedPreferences.Editor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 import android.widget.ViewSwitcher.ViewFactory;
 
 /**
@@ -42,8 +45,10 @@ public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
 	TextView wordTv;
 	ImageSwitcher wordIs;
 	int curPosition = 0;
+	ToggleButton autoplayTb;
 	Button previousBt;
 	Button nextBt;
+	Button audioBt;
 
 	// Unicode for each alphabets
 	char[] alphabet = { 0x0E81, 0x0E82, 0x0E84, 0x0E87, 0x0E88, 0x0EAA, 0x0E8A,
@@ -107,8 +112,10 @@ public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
 		wordTv = (TextView) findViewById(R.id.wordTv);
 		wordTv.setTypeface(getLaoTypeface());
 
+		autoplayTb = (ToggleButton) findViewById(R.id.autoplayTb);
 		previousBt = (Button) findViewById(R.id.previousBt);
 		nextBt = (Button) findViewById(R.id.nextBt);
+		audioBt = (Button) findViewById(R.id.audioBt);
 
 		// Add gesture detector for fling motions.
 		addGestureDector();
@@ -123,10 +130,14 @@ public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
 	 * @param view
 	 */
 	public void previousAlphabet(View view) {
-		if (curPosition > 0) {
-			displayAlphabet(--curPosition);
-			playAudio(null);
+		--curPosition;
+		// Set to start from the last alphabet if it is at the beginning but
+		// "< Previous" button is clicked
+		if (curPosition < 0) {
+			curPosition = sound.length - 1;
 		}
+		displayAlphabet(curPosition);
+		playAudio(null);
 	}
 
 	/**
@@ -147,10 +158,14 @@ public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
 	 * @param view
 	 */
 	public void nextAlphabet(View view) {
-		if (curPosition < alphabet.length - 1) {
-			displayAlphabet(++curPosition);
-			playAudio(null);
+		++curPosition;
+		// Set to start from the first alphabet if it is at the end but
+		// "Next >" button is clicked
+		if (curPosition == alphabet.length) {
+			curPosition = 0;
 		}
+		displayAlphabet(curPosition);
+		playAudio(null);
 	}
 
 	/**
@@ -161,8 +176,8 @@ public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
 	private void displayAlphabet(int position) {
 
 		// Enable/Disable buttons
-		previousBt.setClickable(position > 0);
-		nextBt.setClickable(position < alphabet.length - 1);
+		// previousBt.setClickable(position > 0);
+		// nextBt.setClickable(position < alphabet.length - 1);
 
 		alphabetTv.setText(String.valueOf(alphabet[position]));
 		alphabetSoundTv.setText(alphabetSound[position]);
@@ -206,4 +221,41 @@ public class AlphabetActivity extends LaoBaseActivity implements ViewFactory {
 		previousAlphabet(null);
 	}
 
+	/**
+	 * Get TimerTask for auto play.
+	 * 
+	 * @param view
+	 */
+	@Override
+	public TimerTask getAutoPlayTask() {
+		TimerTask task = null;
+		if (autoplayTb.isChecked()) {
+			final Runnable runnable = new Runnable() {
+				public void run() {
+					nextAlphabet(null);
+				}
+			};
+
+			previousBt.setVisibility(View.INVISIBLE);
+			nextBt.setVisibility(View.INVISIBLE);
+			audioBt.setVisibility(View.INVISIBLE);
+			task = new TimerTask() {
+				@Override
+				public void run() {
+					AlphabetActivity.this.runOnUiThread(runnable);
+				}
+			};
+
+			// Prevent the device to go into sleep mode
+			autoplayTb.setKeepScreenOn(true);
+		} else {
+			previousBt.setVisibility(View.VISIBLE);
+			nextBt.setVisibility(View.VISIBLE);
+			audioBt.setVisibility(View.VISIBLE);
+
+			// Allow the device to go into sleep mode
+			autoplayTb.setKeepScreenOn(false);
+		}
+		return task;
+	}
 }
